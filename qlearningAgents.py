@@ -7,47 +7,23 @@ class QLearningAgent(ReinforcementAgent):
     """
     A Q-Learning agent.
 
-    Some functions that may be useful:
-
-    `pacai.agents.learning.reinforcement.ReinforcementAgent.getAlpha`:
-    Get the learning rate.
-
-    `pacai.agents.learning.reinforcement.ReinforcementAgent.getDiscountRate`:
-    Get the discount rate.
-
-    `pacai.agents.learning.reinforcement.ReinforcementAgent.getEpsilon`:
-    Get the exploration probability.
-
-    `pacai.agents.learning.reinforcement.ReinforcementAgent.getLegalActions`:
-    Get the legal actions for a reinforcement agent.
-
-    `pacai.util.probability.flipCoin`:
-    Flip a coin (get a binary value) with some probability.
-
-    `random.choice`:
-    Pick randomly from a list.
-
-    Additional methods to implement:
+    methods to implement:
 
     `pacai.agents.base.BaseAgent.getAction`:
     Compute the action to take in the current state.
     With probability `pacai.agents.learning.reinforcement.ReinforcementAgent.getEpsilon`,
     we should take a random action and take the best policy action otherwise.
     Note that if there are no legal actions, which is the case at the terminal state,
-    you should choose None as the action.
+    one should choose None as the action.
 
     `pacai.agents.learning.reinforcement.ReinforcementAgent.update`:
     The parent class calls this to observe a state transition and reward.
-    You should do your Q-Value update here.
-    Note that you should never call this function, it will be called on your behalf.
-
-    DESCRIPTION: <Write something here so we know what you did.>
     """
 
     def __init__(self, index, **kwargs):
         super().__init__(index, **kwargs)
 
-        # You can initialize Q-values here.
+        # initialize Q-values here.
         self.qValues = {}
 
     def getQValue(self, state, action):
@@ -64,8 +40,6 @@ class QLearningAgent(ReinforcementAgent):
         Return the value of the best action in a state.
         I.E., the value of the action that solves: `max_action Q(state, action)`.
         Where the max is over legal actions.
-        Note that if there are no legal actions, which is the case at the terminal state,
-        you should return a value of 0.0.
 
         This method pairs with `QLearningAgent.getPolicy`,
         which returns the actual best action.
@@ -85,8 +59,6 @@ class QLearningAgent(ReinforcementAgent):
         Return the best action in a state.
         I.E., the action that solves: `max_action Q(state, action)`.
         Where the max is over legal actions.
-        Note that if there are no legal actions, which is the case at the terminal state,
-        you should return a value of None.
 
         This method pairs with `QLearningAgent.getValue`,
         which returns the value of the best action.
@@ -113,8 +85,6 @@ class QLearningAgent(ReinforcementAgent):
         Compute the action to take in the current state.
         With probability `pacai.agents.learning.reinforcement.ReinforcementAgent.getEpsilon`,
         we should take a random action and take the best policy action otherwise.
-        Note that if there are no legal actions, which is the case at the terminal state,
-        you should choose None as the action.
         """
         # Choose an action by epsilon-greedy algorithm, if there are no legal actions, return None
         possibleActions = self.getLegalActions(state)
@@ -163,10 +133,6 @@ class ApproximateQAgent(PacmanQAgent):
     """
     An approximate Q-learning agent.
 
-    You should only have to overwrite `QLearningAgent.getQValue`
-    and `pacai.agents.learning.reinforcement.ReinforcementAgent.update`.
-    All other `QLearningAgent` functions should work as is.
-
     Additional methods to implement:
 
     `QLearningAgent.getQValue`:
@@ -175,8 +141,6 @@ class ApproximateQAgent(PacmanQAgent):
 
     `pacai.agents.learning.reinforcement.ReinforcementAgent.update`:
     Should update your weights based on transition.
-
-    DESCRIPTION: <Write something here so we know what you did.>
     """
 
     def __init__(self, index,
@@ -184,7 +148,6 @@ class ApproximateQAgent(PacmanQAgent):
         super().__init__(index, **kwargs)
         self.featExtractor = reflection.qualifiedImport(extractor)
 
-        # You might want to initialize weights here.
         self.weights = {}
 
     def getQValue(self, state, action):
@@ -223,8 +186,5 @@ class ApproximateQAgent(PacmanQAgent):
         # Call the super-class final method.
         super().final(state)
 
-        # Did we finish training?
         if self.episodesSoFar == self.numTraining:
-            # You might want to print your weights here for debugging.
-            # *** Your Code Here ***
             print("Weights: ", self.weights)
