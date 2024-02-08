@@ -3,6 +3,8 @@
 Members: Jun Hayashida, Ryan Wang
 ## Project Description
 This project aims to develop a multi-player capture-the-flag variant of Pacman while agents contril both Pacman and ghosts in coordinated team-based strategies. My goal was to create agents capable of efficiently eating food on the opponent's side while defending our side from the opponent. The project was originally completed for the CSE140-01 course at UCSC, under the guidance of Professor Gilpin in the Spring of 2023.
+## Demo
+![demo3](https://github.com/juhayash/Pac-man-AI/assets/140232266/2ffd9730-a9fa-47f0-9b4e-38ec8ebf54ee)
 ## Features
 ### Offensive Agent
 Focuses on maximizing food intake and capsules, avoiding ghosts, and increasing the overall game score.
